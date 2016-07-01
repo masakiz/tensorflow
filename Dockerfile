@@ -14,8 +14,10 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip --no-cache-dir install \
     pandas \
     statsmodels \
+    scikit-learn \
     seaborn \
-    psycopg2
+    psycopg2 \
+    sympy
 
 COPY run.sh /
 

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-tensorboard --logdir=/notebooks/logs
+tensorboard --logdir=/notebooks/logs &
 jupyter notebook "$@"

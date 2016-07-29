@@ -4,4 +4,4 @@
 > docker build --no-cache --rm -t masakiz/tensorflow:0.8 .
 
 # Run
-> docker run --name tensorflow -p 6006:6006 -p 8888:8888 -v ./:/notebooks masakiz/tensorflow:0.8
+> docker run --name tensorflow -p 6006:6006 -p 8888:8888 -v $PWD/notebooks:/notebooks masakiz/tensorflow:0.8

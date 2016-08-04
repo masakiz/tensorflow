@@ -1,4 +1,10 @@
 #!/bin/bash
 
-tensorboard --logdir=/notebooks/logs &
+if [ -z "${LOGDIR}" ]; then
+    export LOGDIR=/notebooks/logs
+fi
+
+mkdir -p ${LOGDIR} 2>/dev/null
+tensorboard --logdir=${LOGDIR} &
+
 jupyter notebook "$@"

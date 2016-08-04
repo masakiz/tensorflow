@@ -1,4 +1,4 @@
-FROM gcr.io/tensorflow/tensorflow
+FROM tensorflow/tensorflow:0.9.0
 
 MAINTAINER masakiz
 

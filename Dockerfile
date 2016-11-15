@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:0.9.0
+FROM tensorflow/tensorflow:0.11.0
 
 MAINTAINER masakiz
 

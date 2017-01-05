@@ -1,7 +1,7 @@
 # tensorflow
 
 # Build
-> docker build --no-cache --rm -t masakiz/tensorflow:0.11.0 .
+> docker build --no-cache --rm -t masakiz/tensorflow:0.12.1 .
 
 # Run
-> docker run --name tensorflow -p 6006:6006 -p 8888:8888 -v $PWD/notebooks:/notebooks -e LOGDIR=/notebooks/logs masakiz/tensorflow:0.11.0
+> docker run --name tensorflow -p 6006:6006 -p 8888:8888 -v $PWD/notebooks:/notebooks -e LOGDIR=/notebooks/logs masakiz/tensorflow:0.12.1

@@ -7,4 +7,4 @@ fi
 mkdir -p ${LOGDIR} 2>/dev/null
 tensorboard --logdir=${LOGDIR} &
 
-jupyter notebook "$@"
+jupyter notebook --allow-root "$@"

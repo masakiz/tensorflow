@@ -33,6 +33,7 @@ RUN apt-get update && \
     pkg-config \
     gzip \
     bzip2 \
+    python3-tk \
     fonts-migmix \
     && \
     update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
@@ -53,6 +54,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     beautifulsoup4 \
     xlrd \
     xlsxwriter \
+    openpyxl \
     keras \
     h5py \
     mecab-python3 \

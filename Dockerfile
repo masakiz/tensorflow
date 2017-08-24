@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.2.0-gpu-py3
+FROM tensorflow/tensorflow:1.3.0-gpu-py3
 
 MAINTAINER masakiz
 
@@ -11,6 +11,7 @@ RUN apt-get update && \
     libpq-dev \
     xclip \
     python-dev \
+    pandoc \
     libxml2 \
     libxml2-dev \
     libxslt-dev \
@@ -107,8 +108,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pydotplus \
     pydot \
     scipy \
-    xgboost
-RUN pip --no-cache-dir install word2vec fasttext
+    xgboost \
+    pypandoc
+RUN pip --no-cache-dir install word2vec fasttext deap
 
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \
     cd /usr/src/s3fs-fuse && \
@@ -126,7 +128,6 @@ RUN cd ~ && \
     cd mecab-ipadic-neologd && \
     ./bin/install-mecab-ipadic-neologd -n -a -y && \
     sed -ri 's:dicdir = /var/lib/mecab/dic/debian:dicdir = /usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
-# please enter 'yes'
 
 RUN mkdir opencv && \
     cd opencv && \

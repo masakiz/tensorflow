@@ -29,6 +29,7 @@ RUN apt-get update && \
     libcurl4-gnutls-dev \
     libfuse-dev \
     libssl-dev \
+    libjsoncpp-dev \
     make \
     pkg-config \
     gzip \
@@ -109,7 +110,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pydot \
     scipy \
     xgboost \
-    pypandoc
+    pypandoc \
+    graphviz
 RUN pip --no-cache-dir install word2vec fasttext deap
 
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \

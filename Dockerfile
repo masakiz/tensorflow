@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.3.0-gpu-py3
+FROM tensorflow/tensorflow:1.4.0-gpu-py3
 
 MAINTAINER masakiz
 

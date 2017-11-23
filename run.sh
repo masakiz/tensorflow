@@ -7,4 +7,6 @@ fi
 mkdir -p ${LOGDIR} 2>/dev/null
 tensorboard --logdir=${LOGDIR} &
 
-jupyter notebook "$@"
+echo "c.NotebookApp.token = u''" >> ~/.jupyter/jupyter_notebook_config.py
+
+jupyter notebook --allow-root --NotebookApp.token= "$@"

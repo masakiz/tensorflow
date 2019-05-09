@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.4.0-gpu-py3
+FROM tensorflow/tensorflow:1.13.1-gpu-py3
 
 MAINTAINER masakiz
 
@@ -111,7 +111,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     scipy \
     xgboost \
     pypandoc \
-    graphviz
+    graphviz \
+    jupyterlab
+
 RUN pip --no-cache-dir install word2vec fasttext deap
 
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \
@@ -133,10 +135,10 @@ RUN cd ~ && \
 
 RUN mkdir opencv && \
     cd opencv && \
-    curl -L https://github.com/opencv/opencv/archive/3.3.0.tar.gz | tar xz && \
+    curl -L https://github.com/opencv/opencv/archive/4.1.0.tar.gz | tar xz && \
     mkdir build && \
     cd build && \
-    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv-3.3.0 && \
+    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv-4.1.0 && \
     make -j $(nproc) && \
     make install
 

@@ -9,4 +9,4 @@ tensorboard --logdir=${LOGDIR} &
 
 echo "c.NotebookApp.token = u''" >> ~/.jupyter/jupyter_notebook_config.py
 
-jupyter notebook --allow-root --NotebookApp.token= "$@"
+jupyter notebook --allow-root --ip=0.0.0.0 --NotebookApp.token= "$@"

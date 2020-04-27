@@ -1,6 +1,8 @@
-FROM tensorflow/tensorflow:1.4.0-gpu-py3
+FROM tensorflow/tensorflow:2.0.1-gpu-py3
 
 MAINTAINER masakiz
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     add-apt-repository ppa:openjdk-r/ppa && \
@@ -20,7 +22,7 @@ RUN apt-get update && \
     mecab-ipadic \
     mecab-ipadic-utf8 \
     python-mecab \
-    openjdk-8-jdk \
+    openjdk-11-jdk \
     ca-certificates-java \
     automake \
     autotools-dev \
@@ -52,15 +54,11 @@ RUN apt-get -y install \
     libdc1394-22 \
     libdc1394-22-dev \
     libjpeg-dev \
-    libpng12-dev \
     libtiff5-dev \
-    libjasper-dev \
     libavcodec-dev \
     libavformat-dev \
     libswscale-dev \
     libxine2-dev \
-    libgstreamer0.10-dev \
-    libgstreamer-plugins-base0.10-dev \
     libv4l-dev \
     libtbb-dev \
     libqt4-dev \
@@ -76,7 +74,7 @@ RUN apt-get -y install \
     x264 \
     v4l-utils
 
-RUN update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
+RUN update-alternatives --set java /usr/lib/jvm/java-11-openjdk-amd64/bin/java && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -95,7 +93,6 @@ RUN pip install --no-cache-dir --upgrade pip && \
     xlrd \
     xlsxwriter \
     openpyxl \
-    keras \
     h5py \
     mecab-python3 \
     Cython \
@@ -111,7 +108,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     scipy \
     xgboost \
     pypandoc \
-    graphviz
+    graphviz \
+    jupyterlab
+
 RUN pip --no-cache-dir install word2vec fasttext deap
 
 RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \
@@ -121,27 +120,20 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \
     make && \
     make install
 
-RUN wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-    tar jxvf phantomjs-2.1.1-linux-x86_64.tar.bz2 && \
-    mv phantomjs-2.1.1-linux-x86_64/bin/phantomjs /usr/local/bin/
-
 RUN cd ~ && \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git && \
     cd mecab-ipadic-neologd && \
     ./bin/install-mecab-ipadic-neologd -n -a -y && \
     sed -ri 's:dicdir = /var/lib/mecab/dic/debian:dicdir = /usr/lib/mecab/dic/mecab-ipadic-neologd:g' /etc/mecabrc
 
-RUN mkdir opencv && \
-    cd opencv && \
-    curl -L https://github.com/opencv/opencv/archive/3.3.0.tar.gz | tar xz && \
-    mkdir build && \
-    cd build && \
-    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv-3.3.0 && \
-    make -j $(nproc) && \
-    make install
-
-RUN mkdir ~/.keras && \
-    echo "{\"backend\": \"tensorflow\"}" > ~/.keras/keras.json
+#RUN mkdir opencv && \
+#    cd opencv && \
+#    curl -L https://github.com/opencv/opencv/archive/4.3.0.tar.gz | tar xz && \
+#    mkdir build && \
+#    cd build && \
+#    cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ../opencv-4.3.0 && \
+#    make -j $(nproc) && \
+#    make install
 
 COPY run.sh /
 
@@ -149,7 +141,7 @@ RUN mkdir -p /notebooks/logs
 
 # TensorBoard
 EXPOSE 6006
-# IPython
+# Jupyter
 EXPOSE 8888
 
 VOLUME "/notebooks"

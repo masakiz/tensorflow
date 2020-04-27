@@ -120,6 +120,7 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git /usr/src/s3fs-fuse && \
     make && \
     make install
 
+
 RUN cd ~ && \
     git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git && \
     cd mecab-ipadic-neologd && \
